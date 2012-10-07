@@ -1,0 +1,24 @@
+<resources>
+
+    <string name="app_name">Check for Updates</string>
+    <string name="title_section3">About</string>
+    <string name="title_section2">File Browser</string>
+    <string name="title_section1">Updates</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+    <string name="menu_feedback">Feedback</string>
+    <string name="title_activity_update">Check for Updates</string>
+
+	<!-- Strings for Update -->
+    <string name="check_updates">Check for updates</string>
+	<string name="update_unavailable">No new updates</string>
+	<string name="checking_updates">Checking for updates</string>
+	<string name="install_now">Reboot to Recovery\nand Install</string>
+	<string name="update_available">Update available</string>
+    <string name="got_it">Got it!</string>	
+    <string name="network_error">Network error detected</string>
+	<string name="connect_data">Connect your device to WiFi or Mobile Network to utilize all features</string>
+	<string name="update_now">There is a new update available, update now?</string>
+	
+	<string name="todo">// TODO: make this look nicer\n// right now it is just for functionality</string>
+</resources>

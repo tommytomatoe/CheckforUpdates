@@ -1,0 +1,7 @@
+net.classic.update
+
+Check for Updates demo/
+
+Very basic class for checking updates of a ROM or Application.
+
+TODO: Clean up UI and add new features.

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:orientation="vertical" 
+android:paddingTop="3dp"
+android:paddingRight="10dp" 
+android:paddingLeft="10dp"
+android:layout_height="fill_parent" 
+android:layout_width="fill_parent">
+	
+	<Button android:layout_height="wrap_content" 
+    	android:id="@+id/update_check_btn"
+    	android:ellipsize="end" 
+    	android:layout_gravity="center"
+    	android:maxLines="2" 
+    	android:gravity="center"
+    	android:text="@string/check_updates"
+    	android:background="@drawable/update_btn"
+    	android:layout_marginTop="3dp" 
+    	android:textSize="11sp"
+    	android:layout_width="fill_parent">
+    
+	</Button>
+	
+	<TextView android:layout_height="wrap_content"
+		android:id="@+id/disclaimer_text"
+		android:text="@string/todo" 
+		android:layout_width="fill_parent"   
+	    
+	/>
+	    
+</LinearLayout>

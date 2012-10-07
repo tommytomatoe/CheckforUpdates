@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+	<color name="main_ics">#ff33b5e5</color>
+	<color name="dark_ics">#ff177bbd</color>
+	<color name="pager_title_bg">#ff3b3b3b</color>
+	<color name="pager_title_bg_light">#ffc0c0c0</color>
+	<color name="footer_bg">#ffdedede</color>
+	<color name="grad_start_light">#a9a9a9</color>
+	<color name="grad_end_light">#f3f3f3</color>
+	<color name="grad_start_dark">#ffffff</color>
+	<color name="grad_end_dark">#ffffff</color>
+</resources>

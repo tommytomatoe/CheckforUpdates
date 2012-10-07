@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<drawable name="ab_bg_black">#aa000000</drawable>
+	<drawable name="bg_clear">#00000000</drawable>
+	<drawable name="background_generic">#ff353535</drawable>
+</resources>
