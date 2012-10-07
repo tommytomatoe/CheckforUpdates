@@ -1,7 +1,26 @@
 net.classic.update
 
-Check for Updates demo/
-
+Check for Updates demo.
 Very basic class for checking updates of a ROM or Application.
 
 TODO: Clean up UI and add new features.
+
+Instructions:
+
+Requires Java 1.6 or above. Built using OpenJDK 7.
+
+Option A. 
+Import project into Eclipse. 
+Requires Android SDK 14 and above. 
+Requires Android ADT 20.0.3 and Android SDK Tools r20.0.3.
+Debug and export as needed.
+
+Option B (recommended):
+In terminal, execute:
+    android update project --target android-15 --path /PATH/TO/PROJECT
+    # for use with debugging
+    ant debug install 
+    # for use with release
+    ant release install
+
+Have fun!
