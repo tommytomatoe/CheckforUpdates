@@ -10,14 +10,18 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.ListFragment;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 
 public class UpdateActivity extends FragmentActivity implements ActionBar.TabListener {
@@ -112,25 +116,30 @@ public class UpdateActivity extends FragmentActivity implements ActionBar.TabLis
             super(fm);
         }
 
+        /**
+         * Fragment returns a particuar view depending on the position of tab
+         * this is how you'd set this up
+         */
         @Override
         public Fragment getItem(int i) {
         	Fragment fragment;
-        	if (i == 0) {
-        		fragment = new UpdateFragment();
-        		Bundle args = new Bundle();
-        		fragment.setArguments(args);
-        	} else {
-        		fragment = new SectionFragment();
-        		Bundle args = new Bundle();
-        		args.putInt(SectionFragment.ARG_SECTION_NUMBER, i + 1);
-        		fragment.setArguments(args);
+
+        	switch (i) {
+        		case 0: fragment = new UpdateFragment();
+        				break;
+        		case 1: return FileBrowserFragment.newInstance(i);
+        		case 2: fragment = new AboutFragment();
+        				break;
+        		case 3: fragment = new AboutFragment2();
+        				break;
+        		default: fragment = new UpdateFragment();
         	}
-            return fragment;
+        	return fragment;
         }
 
         @Override
         public int getCount() {
-            return 3;
+            return 4;
         }
 
         @Override
@@ -139,6 +148,7 @@ public class UpdateActivity extends FragmentActivity implements ActionBar.TabLis
                 case 0: return getString(R.string.title_section1).toUpperCase();
                 case 1: return getString(R.string.title_section2).toUpperCase();
                 case 2: return getString(R.string.title_section3).toUpperCase();
+                case 3: return getString(R.string.title_section4).toUpperCase();
             }
             return null;
         }
@@ -151,13 +161,9 @@ public class UpdateActivity extends FragmentActivity implements ActionBar.TabLis
         public UpdateFragment() {
         }
 
-        public static final String CHECK_UPDATES = "Check for Updates";
-
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
-        	// LinearLayout l = (LinearLayout) 
-        		//	inflater.inflate(R.layout.update_frag, null);
         	
         	View view = inflater.inflate(R.layout.update_frag, container, false);
         	
@@ -176,22 +182,103 @@ public class UpdateActivity extends FragmentActivity implements ActionBar.TabLis
     }
     
     /**
-     * A dummy fragment representing a section of the app, but that simply displays dummy text.
+     * A fragment for file browser view
      */
-    public static class SectionFragment extends Fragment {
-        public SectionFragment() {
+    public static class FileBrowserFragment extends ListFragment {
+        int mNum;
+
+        /**
+         * Create a new instance of CountingFragment, providing "num"
+         * as an argument.
+         */
+        static FileBrowserFragment newInstance(int num) {
+            FileBrowserFragment f = new FileBrowserFragment();
+
+            // Supply num input as an argument.
+            Bundle args = new Bundle();
+            args.putInt("num", num);
+            f.setArguments(args);
+
+            return f;
         }
 
-        public static final String ARG_SECTION_NUMBER = "section_number";
+        /**
+         * When creating, retrieve this instance's number from its arguments.
+         */
+        @Override
+        public void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            mNum = getArguments() != null ? getArguments().getInt("num") : 1;
+        }
+
+        /**
+         * The Fragment's UI is just a simple text view showing its
+         * instance number.
+         */
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                Bundle savedInstanceState) {
+            View v = inflater.inflate(R.layout.file_browser_list, container, false);
+            View tv = v.findViewById(R.id.text);
+            ((TextView)tv).setText("Example of how file browser might look");
+            return v;
+        }
+
+        @Override
+        public void onActivityCreated(Bundle savedInstanceState) {
+            super.onActivityCreated(savedInstanceState);
+            setListAdapter(new ArrayAdapter<String>(getActivity(),
+                    android.R.layout.simple_list_item_1, FILES));
+        }
+
+        @Override
+        public void onListItemClick(ListView l, View v, int position, long id) {
+            Log.i("FragmentList", "Item clicked: " + id);
+        }
+    }
+    
+    /**
+     * A dummy fragment representing a section of the app, but that simply displays dummy text.
+     * 
+     * Inflate from xml file
+     */
+    public static class AboutFragment extends Fragment {
+        public AboutFragment() {
+        }
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
-            TextView textView = new TextView(getActivity());
-            textView.setGravity(Gravity.CENTER);
-            Bundle args = getArguments();
-            textView.setText(Integer.toString(args.getInt(ARG_SECTION_NUMBER)));
-            return textView;
+        	
+        	View view = inflater.inflate(R.layout.about_frag, container, false);
+        	TextView textview = (TextView)view.findViewById(R.id.about_text);
+        	textview.setText("About: Copyright 2012 Tommy Nguyen");
+        	
+        	return view;
+        	
+        }
+    }
+    
+    /**
+     * A dummy fragment representing a section of the app, but that simply displays dummy text.
+     * 
+     * Example of how it is done in CODE:
+     */
+    public static class AboutFragment2 extends Fragment {
+        public AboutFragment2() {
+        }
+
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                Bundle savedInstanceState) {
+        	
+        	TextView textview = new TextView(getActivity());
+        	
+        	textview.setGravity(Gravity.CENTER);
+        	textview.setText("About: Copyright 2012 Tommy Nguyen");
+        	
+        	return textview;
+        	
         }
     }
     
@@ -211,4 +298,9 @@ public class UpdateActivity extends FragmentActivity implements ActionBar.TabLis
     	/* Send it off to the Activity-Chooser */
     	startActivityForResult(Intent.createChooser(email, "Compose mail"), 1);
     }
+    
+    public static final String[] FILES = 
+    {
+    		"File 1", "File 2", "File 3", "File 4", "File 5", "File 6"
+    };
 }

@@ -1,7 +1,8 @@
 <resources>
 
     <string name="app_name">Check for Updates</string>
-    <string name="title_section3">About</string>
+    <string name="title_section4">About (code)</string>
+    <string name="title_section3">About (xml)</string>
     <string name="title_section2">File Browser</string>
     <string name="title_section1">Updates</string>
     <string name="hello_world">Hello world!</string>
@@ -21,4 +22,5 @@
 	<string name="update_now">There is a new update available, update now?</string>
 	
 	<string name="todo">// TODO: make this look nicer\n// right now it is just for functionality</string>
+	<string name="empty">Empty</string>
 </resources>
